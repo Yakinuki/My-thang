@@ -117,16 +117,6 @@ public class listViewController implements Initializable {
     }
 
     public void saveFile(ActionEvent actionEvent) {
-       try {
-           FileWriter writer = new FileWriter("output.txt");
-           for (Unit str : unitList) {
-               writer.write(str + System.lineSeparator());
-           }
-           writer.close();
-       }catch (Exception e){
-           System.out.println(e.getMessage());
-       }
-
     }
 
 
