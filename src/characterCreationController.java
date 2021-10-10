@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -21,14 +22,15 @@ public class characterCreationController implements Initializable {
     public TextField amountField;
     public TextField weaponField;
     public TextField movementField;
-    public ListView skillList;
+    public ListView<String> skillList;
     public Button createButton;
+    public Button removeButton;
 
     ObservableList<String> skills = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        skillList.setItems(skills);
     }
 
     public void addSkill(ActionEvent actionEvent) {
@@ -45,10 +47,23 @@ public class characterCreationController implements Initializable {
     }
 
     public void createAndAdd(ActionEvent actionEvent){
-        Unit tmp = new Unit(unitNameField.getText(), Integer.parseInt(amountField.getText()),finishedBox.isSelected(),weaponField.getText(),movementField.getText(),Integer.parseInt(starsField.getText()));
-        listViewController.unitList.add(tmp);
+        try {
+            Unit tmp = new Unit(unitNameField.getText(), Integer.valueOf(amountField.getText()), finishedBox.isSelected(), weaponField.getText(), movementField.getText(), Integer.valueOf(starsField.getText()));
+            tmp.setHas(skillList.getItems());
+            listViewController.unitList.add(tmp);
+
+        }catch (NumberFormatException e){
+            System.out.println("please enter the amount of units and the amount of stars");
+        }
     }
 
-    public void boxTicked(ActionEvent actionEvent) {
+
+    public void removeSkill(ActionEvent actionEvent) {
+        int tmp = skillList.getSelectionModel().getSelectedIndex();
+        skills.remove(tmp);
+        skillList.setItems(skills);
     }
+
+
+
 }

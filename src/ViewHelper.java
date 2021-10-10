@@ -28,9 +28,6 @@ public class ViewHelper {
         alert.setTitle("Fehler");
         alert.setHeaderText("Es ist folgender Fehler aufgetreten:");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            System.out.println("Fenster wieder geschlossen.");
-        }
     }
 
     /**

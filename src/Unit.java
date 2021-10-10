@@ -1,5 +1,8 @@
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Unit {
@@ -9,8 +12,8 @@ public class Unit {
     String weapon;
     String movement;
     int stars;
-    ArrayList<String> has;
-    ArrayList<String > needs;
+    ObservableList<String> has;
+    ObservableList<String > needs;
 
     public Unit(String name, int amount, boolean finished, String weapon, String movement, int stars){
         this.name=name;
@@ -19,6 +22,8 @@ public class Unit {
         this.stars=stars;
         this.weapon=weapon;
         this.movement=movement;
+        has = FXCollections.observableArrayList();
+        needs = FXCollections.observableArrayList();
     }
 
     public String getWeapon() {
@@ -69,19 +74,19 @@ public class Unit {
         this.amount = amount;
     }
 
-    public ArrayList<String> getHas() {
+    public ObservableList<String> getHas() {
         return has;
     }
 
-    public void setHas(ArrayList<String> has) {
+    public void setHas(ObservableList<String> has) {
         this.has = has;
     }
 
-    public ArrayList<String> getNeeds() {
+    public ObservableList<String> getNeeds() {
         return needs;
     }
 
-    public void setNeeds(ArrayList<String> needs) {
+    public void setNeeds(ObservableList<String> needs) {
         this.needs = needs;
     }
 }

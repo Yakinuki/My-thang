@@ -30,7 +30,7 @@
       <TextField fx:id="skillField" layoutX="140.0" layoutY="458.0" />
       <Button fx:id="addSkillButton" layoutX="185.0" layoutY="483.0" mnemonicParsing="false" onAction="#addSkill" text="Add Skill" />
       <TextField fx:id="unitNameField" layoutX="137.0" layoutY="35.0" prefHeight="25.0" prefWidth="113.0" />
-      <CheckBox fx:id="finishedBox" layoutX="299.0" layoutY="212.0" mnemonicParsing="false" onAction="#boxTicked" prefHeight="46.0" prefWidth="113.0" text="Finished ?">
+      <CheckBox fx:id="finishedBox" layoutX="299.0" layoutY="212.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="113.0" text="Finished ?">
          <font>
             <Font size="18.0" />
          </font>
@@ -54,5 +54,8 @@
          </font>
       </Label>
       <TextField fx:id="movementField" layoutX="138.0" layoutY="95.0" prefHeight="25.0" prefWidth="113.0" />
+      <Button fx:id="removeButton" layoutX="356.0" layoutY="458.0" mnemonicParsing="false" onAction="#removeSkill" text="Remove" />
+      <Label layoutX="25.0" layoutY="2.0" prefHeight="25.0" prefWidth="137.0" text="Unit Creation" />
+      <Label layoutX="11.0" layoutY="525.0" text="1.0" />
    </children>
 </AnchorPane>

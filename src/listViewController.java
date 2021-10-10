@@ -10,12 +10,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import java.io.FileWriter;
+import java.io.FileReader;
 
 public class listViewController implements Initializable {
     @FXML
@@ -26,6 +31,8 @@ public class listViewController implements Initializable {
     public Button deleteButton;
     @FXML
     public Button refreshButton;
+    public Menu load;
+    public Menu save;
     @FXML
     private TableView<Unit> UnitTable;
     @FXML
@@ -44,6 +51,8 @@ public class listViewController implements Initializable {
     private TextField searchField;
 
     static ObservableList<Unit> unitList ;
+    FileWriter fileWriter;
+    FileReader fileReader;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,9 +60,7 @@ public class listViewController implements Initializable {
 
     }
     private void configure(){
-        Unit tmp = new Unit("Sothe",2,true,"Dagger","infantry",(Integer) 4);
         unitList = FXCollections.observableArrayList();
-        unitList.add(tmp);
         UnitTable.setItems(unitList);
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("name"));
@@ -70,7 +77,6 @@ public class listViewController implements Initializable {
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("characterCreation.fxml"));
-
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -84,9 +90,47 @@ public class listViewController implements Initializable {
 
 
     public void deleteUnit(ActionEvent actionEvent) {
+        if(!UnitTable.getSelectionModel().isEmpty()){
+            int del = UnitTable.getSelectionModel().getSelectedIndex();
+            unitList.remove(del);
+        }
     }
 
     public void refresh(ActionEvent actionEvent) {
         UnitTable.setItems(unitList);
+    }
+
+    public void onDoubleClick(MouseEvent mouseEvent) {
+        if (mouseEvent.getClickCount() == 2){
+            Parent root = null;
+            try {
+                needsController.setMouseLocationIndex(UnitTable.getSelectionModel().getSelectedIndex());
+                root = FXMLLoader.load(getClass().getResource("needsNStuff.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveFile(ActionEvent actionEvent) {
+       try {
+           FileWriter writer = new FileWriter("output.txt");
+           for (Unit str : unitList) {
+               writer.write(str + System.lineSeparator());
+           }
+           writer.close();
+       }catch (Exception e){
+           System.out.println(e.getMessage());
+       }
+
+    }
+
+
+
+    public void loadFile(ActionEvent actionEvent) {
     }
 }
